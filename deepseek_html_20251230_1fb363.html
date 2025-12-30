@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новый 2026 Год | Самарское время</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #0c1b33, #1a1a2e, #16213e);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .mobile-notice {
+            display: none;
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid #FFD700;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-notice {
+                display: block;
+            }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .access-instructions {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 5px solid #FFD700;
+        }
+        
+        .access-instructions h3 {
+            color: #FFD700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .instruction-step {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+        }
+        
+        .qr-code {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .qr-code img {
+            width: 180px;
+            height: 180px;
+        }
+        
+        /* Остальные стили из предыдущего кода */
+        header { padding: 30px 0; }
+        .logo {
+            font-size: 2.5rem;
+            color: #FFD700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #FFD700, #FFA500);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .year-2026 {
+            font-size: 4rem;
+            color: #ff6b6b;
+            text-shadow: 0 0 20px rgba(255, 107, 107, 0.7);
+            margin: 10px 0;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .timezone-info {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 30px;
+            display: inline-block;
+            backdrop-filter: blur(5px);
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .countdown-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px 20px;
+            min-width: 150px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .countdown-box:hover {
+            transform: translateY(-10px);
+        }
+        
+        .countdown-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .current-time {
+            font-size: 1.5rem;
+            margin: 30px 0;
+            color: #b0c4ff;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+        
+        .snowflake {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        
+        .share-buttons {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .share-btn {
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .share-btn:hover {
+            background: rgba(255, 215, 0, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            margin-top: 50px;
+            padding: 20px;
+            color: #b0c4ff;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="snowflakes" id="snowflakes"></div>
+    
+    <div class="mobile-notice">
+        <i class="fas fa-mobile-alt"></i> Вы просматриваете сайт на мобильном устройстве. 
+        Для доступа с других устройств используйте тот же URL-адрес.
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-tree"></i>
+                <span>Новый Год 2026</span>
+                <i class="fas fa-gift"></i>
+            </div>
+        </header>
+        
+        <main>
+            <h1>Отсчёт до Нового Года</h1>
+            <div class="year-2026">2026</div>
+            <div class="subtitle">До наступления 2026 года осталось:</div>
+            
+            <div class="timezone-info">
+                <i class="fas fa-clock"></i>
+                <span>Самарское время (UTC+4)</span>
+            </div>
+            
+            <div class="current-time" id="current-time">
+                Текущее время: загрузка...
+            </div>
+            
+            <div class="countdown-container">
+                <div class="countdown-box">
+                    <div class="countdown-value" id="days">00</div>
+                    <div class="countdown-label">дней</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="hours">00</div>
+                    <div class="countdown-label">часов</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="minutes">00</div>
+                    <div class="countdown-label">минут</div>
+                </div>
+                <div class="countdown-box">
+                    <div class="countdown-value" id="seconds">00</div>
+                    <div class="countdown-label">секунд</div>
+                </div>
+            </div>
+            
+            <!-- Инструкции по доступу -->
+            <div class="access-instructions">
+                <h3><i class="fas fa-wifi"></i> Как зайти на сайт с любого устройства:</h3>
+                
+                <div class="instruction-step">
+                    <strong>1. Сохраните эту страницу:</strong>
+                    <p>Нажмите Ctrl+S (Cmd+S на Mac) или в меню браузера "Файл → Сохранить как"</p>
+                </div>
+                
+                <div class="instruction-step">
+                    <strong>2. Разместите в интернете (бесплатно):</strong>
+                    <p>• Зарегистрируйтесь на <a href="https://github.com" style="color:#4dabf7;">GitHub.com</a></p>
+                    <p>• Создайте новый репозиторий и загрузите этот файл</p>
+                    <p>• Включите GitHub Pages в настройках</p>
+                </div>
+                
+                <div class="instruction-step">
+                    <strong>3. Быстрый доступ с телефона:</strong>
+                    <p>Отсканируйте QR-код справа →</p>
+                </div>
+            </div>
+            
+            <!-- QR код для быстрого доступа -->
+            <div class="qr-code" id="qr-container">
+                <p>Отсканируйте для быстрого доступа</p>
+                <div id="qrcode"></div>
+                <p style="color: #333; margin-top: 10px;">Или перейдите по ссылке:</p>
+                <p id="current-url" style="color: #666; word-break: break-all;"></p>
+            </div>
+            
+            <!-- Кнопки поделиться -->
+            <div class="share-buttons">
+                <button class="share-btn" onclick="shareLink()">
+                    <i class="fas fa-share-alt"></i> Поделиться ссылкой
+                </button>
+                <button class="share-btn" onclick="copyLink()">
+                    <i class="fas fa-copy"></i> Скопировать URL
+                </button>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Сайт с отсчётом до Нового 2026 года по самарскому времени</p>
+            <p>© 2024 | Для доступа с любого устройства используйте этот файл на любом хостинге</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                <i class="fas fa-info-circle"></i> Просто откройте этот HTML-файл в браузере на любом устройстве
+            </p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script>
+        // Создание снежинок
+        function createSnowflakes() {
+            const container = document.getElementById('snowflakes');
+            for (let i = 0; i < 50; i++) {
+                const flake = document.createElement('div');
+                flake.className = 'snowflake';
+                flake.style.width = flake.style.height = (Math.random() * 5 + 3) + 'px';
+                flake.style.left = Math.random() * 100 + 'vw';
+                flake.style.animation = `fall ${Math.random() * 10 + 10}s linear infinite`;
+                flake.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(flake);
+            }
+            
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fall {
+                    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+                    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+        
+        // Генерация QR-кода
+        function generateQRCode() {
+            const currentUrl = window.location.href;
+            document.getElementById('current-url').textContent = currentUrl;
+            
+            // Создаем QR-код
+            new QRCode(document.getElementById("qrcode"), {
+                text: currentUrl,
+                width: 180,
+                height: 180,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+        
+        // Функции для шаринга
+        function shareLink() {
+            const currentUrl = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Отсчёт до Нового 2026 года',
+                    text: 'Следите за отсчётом до Нового 2026 года по самарскому времени!',
+                    url: currentUrl
+                });
+            } else {
+                copyLink();
+                alert('Ссылка скопирована в буфер обмена!');
+            }
+        }
+        
+        function copyLink() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl).then(() => {
+                alert('Ссылка скопирована в буфер обмена!');
+            });
+        }
+        
+        // Таймер
+        function getSamaraTime() {
+            const now = new Date();
+            const utcTime = now.getTime() + (now.getTimezoneOffset() * 60000);
+            const samaraOffset = 4 * 60 * 60000;
+            return new Date(utcTime + samaraOffset);
+        }
+        
+        function updateCountdown() {
+            const now = getSamaraTime();
+            const newYear2026 = new Date(2026, 0, 1, 0, 0, 0);
+            const diff = newYear2026 - now;
+            
+            if (diff <= 0) {
+                document.getElementById('new-year-message').style.display = 'block';
+                return;
+            }
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days.toString().padStart(2, '0');
+            document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            
+            const timeString = now.toLocaleTimeString('ru-RU');
+            const dateString = now.toLocaleDateString('ru-RU', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                weekday: 'long'
+            });
+            document.getElementById('current-time').innerHTML = 
+                `<i class="fas fa-calendar-alt"></i> ${dateString}<br>
+                 <i class="fas fa-clock"></i> Текущее время в Самаре: ${timeString}`;
+        }
+        
+        // Инициализация
+        window.onload = function() {
+            createSnowflakes();
+            generateQRCode();
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        };
+    </script>
+</body>
+</html>
